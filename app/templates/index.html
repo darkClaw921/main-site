@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock Display</title>
+    <style>
+        @font-face {
+            font-family: 'Alteran';
+            src: url('/static/alteran.ttf') format('truetype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            transition: background-color 0.5s ease-in-out;
+        }
+
+        #clock {
+            font-family: 'Alteran', monospace;
+            color: #808080;
+            font-size: 8vw;
+            text-align: center;
+            letter-spacing: 0.1em;
+            user-select: none;
+            white-space: nowrap;
+            transition: color 0.5s ease-in-out, text-shadow 0.5s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            #clock {
+                font-size: 10vw;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="/static/matrix-theme.css">
+</head>
+<body>
+    <canvas id="matrix-canvas"></canvas>
+    <div id="clock">00:00:00:000</div>
+
+    <script src="/static/matrix-effect.js"></script>
+    <script>
+        // Инициализация эффекта матрицы
+        let matrixEffect;
+        let isMatrixTheme = false;
+        
+        window.addEventListener('load', () => {
+            matrixEffect = new MatrixEffect();
+        });
+        
+        // Функция обновления часов
+        function updateClock() {
+            const now = new Date();
+            
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+            
+            const timeString = `${hours}:${minutes}:${seconds}:${milliseconds}`;
+            
+            document.getElementById('clock').textContent = timeString;
+        }
+        
+        // Функция переключения темы
+        function toggleTheme() {
+            const body = document.body;
+            
+            if (isMatrixTheme) {
+                // Переключение на обычную тему
+                body.classList.remove('matrix-theme');
+                matrixEffect.stop();
+            } else {
+                // Переключение на тему Матрицы
+                body.classList.add('matrix-theme');
+                matrixEffect.start();
+            }
+            
+            isMatrixTheme = !isMatrixTheme;
+        }
+        
+        // Обработчик нажатия клавиш
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space') {
+                event.preventDefault(); // Предотвращаем прокрутку страницы
+                toggleTheme();
+            }
+        });
+        
+        // Обновление каждые 10 миллисекунд для плавного отображения
+        setInterval(updateClock, 10);
+        
+        // Первое обновление сразу при загрузке
+        updateClock();
+    </script>
+</body>
+</html>
+
