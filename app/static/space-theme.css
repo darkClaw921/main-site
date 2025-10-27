@@ -1,0 +1,43 @@
+/* Тема "Космос" */
+.space-theme {
+    background-color: #000000;
+}
+
+.space-theme #clock {
+    font-family: 'Alteran', monospace;
+    color: #ffffff;
+    font-size: 8vw;
+    text-align: center;
+    letter-spacing: 0.1em;
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+    z-index: 10;
+    text-shadow: 
+        0 0 10px #4da6ff,
+        0 0 20px #4da6ff,
+        0 0 30px #1a8cff,
+        0 0 40px #0073e6;
+}
+
+#space-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.space-theme #space-canvas {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .space-theme #clock {
+        font-size: 10vw;
+    }
+}
+

@@ -45,19 +45,30 @@
         }
     </style>
     <link rel="stylesheet" href="/static/matrix-theme.css">
+    <link rel="stylesheet" href="/static/space-theme.css">
 </head>
 <body>
     <canvas id="matrix-canvas"></canvas>
+    <canvas id="space-canvas"></canvas>
     <div id="clock">00:00:00:000</div>
 
     <script src="/static/matrix-effect.js"></script>
+    <script src="/static/space-effect.js"></script>
     <script>
-        // Инициализация эффекта матрицы
+        // Инициализация эффектов
         let matrixEffect;
-        let isMatrixTheme = false;
+        let spaceEffect;
+        
+        // Темы: 0 - обычная, 1 - матрица, 2 - космос
+        let currentTheme = 0;
+        const THEME_NORMAL = 0;
+        const THEME_MATRIX = 1;
+        const THEME_SPACE = 2;
+        const THEME_COUNT = 3;
         
         window.addEventListener('load', () => {
             matrixEffect = new MatrixEffect();
+            spaceEffect = new SpaceEffect();
         });
         
         // Функция обновления часов
@@ -78,17 +89,31 @@
         function toggleTheme() {
             const body = document.body;
             
-            if (isMatrixTheme) {
-                // Переключение на обычную тему
-                body.classList.remove('matrix-theme');
-                matrixEffect.stop();
-            } else {
-                // Переключение на тему Матрицы
-                body.classList.add('matrix-theme');
-                matrixEffect.start();
-            }
+            // Останавливаем все эффекты
+            matrixEffect.stop();
+            spaceEffect.stop();
             
-            isMatrixTheme = !isMatrixTheme;
+            // Удаляем все классы тем
+            body.classList.remove('matrix-theme', 'space-theme');
+            
+            // Переключаемся на следующую тему (циклически)
+            currentTheme = (currentTheme + 1) % THEME_COUNT;
+            
+            // Применяем новую тему
+            switch (currentTheme) {
+                case THEME_MATRIX:
+                    body.classList.add('matrix-theme');
+                    matrixEffect.start();
+                    break;
+                case THEME_SPACE:
+                    body.classList.add('space-theme');
+                    spaceEffect.start();
+                    break;
+                case THEME_NORMAL:
+                default:
+                    // Обычная тема - ничего не добавляем
+                    break;
+            }
         }
         
         // Обработчик нажатия клавиш
