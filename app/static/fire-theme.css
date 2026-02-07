@@ -1,0 +1,42 @@
+/* Тема Fire */
+.fire-theme {
+    background-color: #000000;
+}
+
+.fire-theme #clock {
+    font-family: 'Alteran', monospace;
+    color: #ffff00;
+    font-size: 8vw;
+    text-align: center;
+    letter-spacing: 0.1em;
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+    z-index: 10;
+    text-shadow:
+        0 0 10px #ffff00,
+        0 0 20px #ffaa00,
+        0 0 30px #ff6600,
+        0 0 40px #ff3300;
+}
+
+#fire-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fire-theme #fire-canvas {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .fire-theme #clock {
+        font-size: 10vw;
+    }
+}

@@ -46,59 +46,158 @@
     </style>
     <link rel="stylesheet" href="/static/matrix-theme.css">
     <link rel="stylesheet" href="/static/space-theme.css">
+    <link rel="stylesheet" href="/static/bounce-theme.css">
+    <link rel="stylesheet" href="/static/rain-theme.css">
+    <link rel="stylesheet" href="/static/fire-theme.css">
+    <link rel="stylesheet" href="/static/pulse-theme.css">
+    <link rel="stylesheet" href="/static/quantum-theme.css">
+    <link rel="stylesheet" href="/static/wave-theme.css">
+    <link rel="stylesheet" href="/static/glitch-theme.css">
+    <link rel="stylesheet" href="/static/vortex-theme.css">
+    <link rel="stylesheet" href="/static/snow-theme.css">
+    <link rel="stylesheet" href="/static/lightning-theme.css">
+    <link rel="stylesheet" href="/static/binary-theme.css">
 </head>
 <body>
     <canvas id="matrix-canvas"></canvas>
     <canvas id="space-canvas"></canvas>
+    <canvas id="bounce-canvas"></canvas>
+    <canvas id="rain-canvas"></canvas>
+    <canvas id="fire-canvas"></canvas>
+    <canvas id="pulse-canvas"></canvas>
+    <canvas id="quantum-canvas"></canvas>
+    <canvas id="wave-canvas"></canvas>
+    <canvas id="glitch-canvas"></canvas>
+    <canvas id="vortex-canvas"></canvas>
+    <canvas id="snow-canvas"></canvas>
+    <canvas id="lightning-canvas"></canvas>
+    <canvas id="binary-canvas"></canvas>
     <div id="clock">00:00:00:000</div>
 
     <script src="/static/matrix-effect.js"></script>
     <script src="/static/space-effect.js"></script>
+    <script src="/static/bounce-effect.js"></script>
+    <script src="/static/rain-effect.js"></script>
+    <script src="/static/fire-effect.js"></script>
+    <script src="/static/pulse-effect.js"></script>
+    <script src="/static/quantum-effect.js"></script>
+    <script src="/static/wave-effect.js"></script>
+    <script src="/static/glitch-effect.js"></script>
+    <script src="/static/vortex-effect.js"></script>
+    <script src="/static/snow-effect.js"></script>
+    <script src="/static/lightning-effect.js"></script>
+    <script src="/static/binary-effect.js"></script>
     <script>
         // Инициализация эффектов
         let matrixEffect;
         let spaceEffect;
-        
-        // Темы: 0 - обычная, 1 - матрица, 2 - космос
+        let bounceEffect;
+        let rainEffect;
+        let fireEffect;
+        let pulseEffect;
+        let quantumEffect;
+        let waveEffect;
+        let glitchEffect;
+        let vortexEffect;
+        let snowEffect;
+        let lightningEffect;
+        let binaryEffect;
+
+        // Темы
         let currentTheme = 0;
         const THEME_NORMAL = 0;
         const THEME_MATRIX = 1;
         const THEME_SPACE = 2;
-        const THEME_COUNT = 3;
-        
+        const THEME_BOUNCE = 3;
+        const THEME_RAIN = 4;
+        const THEME_FIRE = 5;
+        const THEME_PULSE = 6;
+        const THEME_QUANTUM = 7;
+        const THEME_WAVE = 8;
+        const THEME_GLITCH = 9;
+        const THEME_VORTEX = 10;
+        const THEME_SNOW = 11;
+        const THEME_LIGHTNING = 12;
+        const THEME_BINARY = 13;
+        const THEME_COUNT = 14;
+
         window.addEventListener('load', () => {
             matrixEffect = new MatrixEffect();
             spaceEffect = new SpaceEffect();
+            bounceEffect = new BounceEffect();
+            rainEffect = new RainEffect();
+            fireEffect = new FireEffect();
+            pulseEffect = new PulseEffect();
+            quantumEffect = new QuantumEffect();
+            waveEffect = new WaveEffect();
+            glitchEffect = new GlitchEffect();
+            vortexEffect = new VortexEffect();
+            snowEffect = new SnowEffect();
+            lightningEffect = new LightningEffect();
+            binaryEffect = new BinaryEffect();
         });
         
         // Функция обновления часов
         function updateClock() {
             const now = new Date();
-            
+
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
             const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
-            
+
             const timeString = `${hours}:${minutes}:${seconds}:${milliseconds}`;
-            
+
             document.getElementById('clock').textContent = timeString;
+
+            // Обновляем символы в Bounce эффекте, если он активен
+            if (currentTheme === THEME_BOUNCE && bounceEffect && bounceEffect.isActive) {
+                bounceEffect.updateTime(timeString);
+            }
         }
         
         // Функция переключения темы
         function toggleTheme() {
             const body = document.body;
-            
+
             // Останавливаем все эффекты
             matrixEffect.stop();
             spaceEffect.stop();
-            
+            bounceEffect.stop();
+            rainEffect.stop();
+            fireEffect.stop();
+            pulseEffect.stop();
+            quantumEffect.stop();
+            waveEffect.stop();
+            glitchEffect.stop();
+            vortexEffect.stop();
+            snowEffect.stop();
+            lightningEffect.stop();
+            binaryEffect.stop();
+
             // Удаляем все классы тем
-            body.classList.remove('matrix-theme', 'space-theme');
-            
+            body.classList.remove(
+                'matrix-theme',
+                'space-theme',
+                'bounce-theme',
+                'rain-theme',
+                'fire-theme',
+                'pulse-theme',
+                'quantum-theme',
+                'wave-theme',
+                'glitch-theme',
+                'vortex-theme',
+                'snow-theme',
+                'lightning-theme',
+                'binary-theme'
+            );
+
             // Переключаемся на следующую тему (циклически)
             currentTheme = (currentTheme + 1) % THEME_COUNT;
-            
+
+            // Получаем текущее время для передачи эффектам
+            const timeString = document.getElementById('clock').textContent;
+
             // Применяем новую тему
             switch (currentTheme) {
                 case THEME_MATRIX:
@@ -108,6 +207,50 @@
                 case THEME_SPACE:
                     body.classList.add('space-theme');
                     spaceEffect.start();
+                    break;
+                case THEME_BOUNCE:
+                    body.classList.add('bounce-theme');
+                    bounceEffect.start(timeString);
+                    break;
+                case THEME_RAIN:
+                    body.classList.add('rain-theme');
+                    rainEffect.start();
+                    break;
+                case THEME_FIRE:
+                    body.classList.add('fire-theme');
+                    fireEffect.start();
+                    break;
+                case THEME_PULSE:
+                    body.classList.add('pulse-theme');
+                    pulseEffect.start();
+                    break;
+                case THEME_QUANTUM:
+                    body.classList.add('quantum-theme');
+                    quantumEffect.start();
+                    break;
+                case THEME_WAVE:
+                    body.classList.add('wave-theme');
+                    waveEffect.start();
+                    break;
+                case THEME_GLITCH:
+                    body.classList.add('glitch-theme');
+                    glitchEffect.start();
+                    break;
+                case THEME_VORTEX:
+                    body.classList.add('vortex-theme');
+                    vortexEffect.start();
+                    break;
+                case THEME_SNOW:
+                    body.classList.add('snow-theme');
+                    snowEffect.start();
+                    break;
+                case THEME_LIGHTNING:
+                    body.classList.add('lightning-theme');
+                    lightningEffect.start();
+                    break;
+                case THEME_BINARY:
+                    body.classList.add('binary-theme');
+                    binaryEffect.start();
                     break;
                 case THEME_NORMAL:
                 default:

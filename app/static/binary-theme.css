@@ -1,0 +1,42 @@
+/* Тема Binary */
+.binary-theme {
+    background-color: #000000;
+}
+
+.binary-theme #clock {
+    font-family: 'Alteran', monospace;
+    color: #00ff00;
+    font-size: 8vw;
+    text-align: center;
+    letter-spacing: 0.1em;
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+    z-index: 10;
+    text-shadow:
+        0 0 10px #00ff00,
+        0 0 20px #00ff00,
+        0 0 30px #00cc00,
+        0 0 40px #00cc00;
+}
+
+#binary-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.binary-theme #binary-canvas {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .binary-theme #clock {
+        font-size: 10vw;
+    }
+}

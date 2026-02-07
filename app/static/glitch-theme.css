@@ -1,0 +1,40 @@
+/* Тема Glitch */
+.glitch-theme {
+    background-color: #000000;
+}
+
+.glitch-theme #clock {
+    font-family: 'Alteran', monospace;
+    color: #ffffff;
+    font-size: 8vw;
+    text-align: center;
+    letter-spacing: 0.1em;
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+    z-index: 10;
+    text-shadow:
+        0 0 10px #ff0000,
+        0 0 20px #00ffff;
+}
+
+#glitch-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.glitch-theme #glitch-canvas {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .glitch-theme #clock {
+        font-size: 10vw;
+    }
+}

@@ -1,0 +1,42 @@
+/* Тема Vortex */
+.vortex-theme {
+    background-color: #000000;
+}
+
+.vortex-theme #clock {
+    font-family: 'Alteran', monospace;
+    color: #4444ff;
+    font-size: 8vw;
+    text-align: center;
+    letter-spacing: 0.1em;
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+    z-index: 10;
+    text-shadow:
+        0 0 10px #4444ff,
+        0 0 20px #4444ff,
+        0 0 30px #3333cc,
+        0 0 40px #3333cc;
+}
+
+#vortex-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.vortex-theme #vortex-canvas {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .vortex-theme #clock {
+        font-size: 10vw;
+    }
+}

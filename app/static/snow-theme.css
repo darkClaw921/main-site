@@ -1,0 +1,42 @@
+/* Тема Snow */
+.snow-theme {
+    background-color: #000000;
+}
+
+.snow-theme #clock {
+    font-family: 'Alteran', monospace;
+    color: #ffffff;
+    font-size: 8vw;
+    text-align: center;
+    letter-spacing: 0.1em;
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+    z-index: 10;
+    text-shadow:
+        0 0 10px #ffffff,
+        0 0 20px #ccffff,
+        0 0 30px #aaddff,
+        0 0 40px #88ccff;
+}
+
+#snow-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.snow-theme #snow-canvas {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .snow-theme #clock {
+        font-size: 10vw;
+    }
+}

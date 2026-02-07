@@ -1,0 +1,42 @@
+/* Тема Rain */
+.rain-theme {
+    background-color: #000000;
+}
+
+.rain-theme #clock {
+    font-family: 'Alteran', monospace;
+    color: #00ccff;
+    font-size: 8vw;
+    text-align: center;
+    letter-spacing: 0.1em;
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+    z-index: 10;
+    text-shadow:
+        0 0 10px #00ccff,
+        0 0 20px #00ccff,
+        0 0 30px #0099cc,
+        0 0 40px #0099cc;
+}
+
+#rain-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.rain-theme #rain-canvas {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .rain-theme #clock {
+        font-size: 10vw;
+    }
+}

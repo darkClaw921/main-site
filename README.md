@@ -5,13 +5,13 @@
 ## Установка
 
 ```bash
-uv pip install -e .
+uv sync
 ```
 
 ## Запуск
 
 ```bash
-python run.py
+uv run run.py
 ```
 
 Приложение будет доступно по адресу: http://localhost:8000
